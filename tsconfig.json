@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "allowJs": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "strict": true,
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "nuxt.config.js",
+    "server/index.js",
+  ]
+}
