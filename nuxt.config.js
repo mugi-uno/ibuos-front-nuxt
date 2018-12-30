@@ -1,7 +1,6 @@
 const Dotenv = require('dotenv-webpack');
-const pkg = require('./package');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
-const HardSource = require('hard-source-webpack-plugin');
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
   debug: true,
@@ -142,6 +141,6 @@ module.exports = {
         'postcss-nesting': true,
       },
     },
-    plugins: [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
+    plugins: isProd ? [] : [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
   },
 };
