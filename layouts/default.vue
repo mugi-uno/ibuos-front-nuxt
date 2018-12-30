@@ -23,7 +23,7 @@ import Alerts from '../containers/Alerts.vue';
 @Component({
   components: {
     AppHeader,
-    Alerts
+    Alerts,
   },
 })
 export default class DefaultLayout extends Vue {}

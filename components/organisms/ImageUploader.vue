@@ -34,7 +34,7 @@ if (process.client) {
 }
 
 @Component({
-  components: { Dropzone }
+  components: { Dropzone },
 })
 export default class ImageUploader extends Vue {
   @Prop({ default: '' })
@@ -44,13 +44,15 @@ export default class ImageUploader extends Vue {
   uploading: boolean = false;
 
   @Emit()
-  uploaded(data: { url: string, basename: string }) {}
+  uploaded(data: { url: string; basename: string }) {}
 
   async onFileAdded(file) {
     if (this.uploading) return;
     this.uploading = true;
 
-    const { data } = await api.uploadTemporaryImage(this.$axios, file).catch(() => ({ data: {} }));
+    const { data } = await api
+      .uploadTemporaryImage(this.$axios, file)
+      .catch(() => ({ data: {} }));
 
     if (data && data.url) {
       this.uploaded(data);

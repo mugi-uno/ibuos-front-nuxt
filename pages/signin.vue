@@ -31,7 +31,7 @@ export default class ComponentName extends Vue {
           redirectUrl: any
         ) => {
           this.signin(currentUser).then(() => {
-            this.$router.push(this.$route.query.r as string || '/');
+            this.$router.push((this.$route.query.r as string) || '/');
             this.$message({
               type: 'success',
               message: 'ログインしました',
@@ -51,7 +51,9 @@ export default class ComponentName extends Vue {
     // 何らかのURLのリダイレクトを要求されている
     // = 認証が必要なページに認証が無い状態でのアクセスと判断して、エラーメッセージを表示
     if (this.$route.query.r) {
-      this.$store.dispatch('alert/addWarningAlert', { title: 'ログインが必要です' });
+      this.$store.dispatch('alert/addWarningAlert', {
+        title: 'ログインが必要です',
+      });
     }
   }
 }

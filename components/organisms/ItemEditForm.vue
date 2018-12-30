@@ -61,30 +61,31 @@ import ImageUploader from '~/components/organisms/ImageUploader.vue';
 import Vue from 'vue';
 
 @Component({
-  components: { ImageUploader }
+  components: { ImageUploader },
 })
 export default class ItemEditForm extends Vue {
   @Prop({ default: false })
   saving!: boolean;
-  @Prop()
-  initialItemForm!: ItemForm;
+  @Prop() initialItemForm!: ItemForm;
 
   itemForm: ItemForm = {
     ...this.initialItemForm,
     temporaryImage: {
-      ...this.initialItemForm.temporaryImage
-    }
+      ...this.initialItemForm.temporaryImage,
+    },
   };
 
   get imageUrl(): string {
-    return this.itemForm.temporaryImage.imageTemporaryUrl || this.itemForm.imageUrl;
+    return (
+      this.itemForm.temporaryImage.imageTemporaryUrl || this.itemForm.imageUrl
+    );
   }
 
   get isUpdate(): boolean {
     return !!this.itemForm.id;
   }
 
-  uploadedTemporaryImage(data: { url: string, basename: string }) {
+  uploadedTemporaryImage(data: { url: string; basename: string }) {
     this.itemForm.temporaryImage.imageTemporaryUrl = data.url;
     this.itemForm.temporaryImage.imageTemporaryBasename = data.basename;
   }

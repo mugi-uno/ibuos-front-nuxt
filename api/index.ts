@@ -1,4 +1,8 @@
-import { ItemResponse, PaginatingResponse, AnyUserResponse } from './interfaces';
+import {
+  ItemResponse,
+  PaginatingResponse,
+  AnyUserResponse,
+} from './interfaces';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import { ItemForm } from '~/presenters/itemForm';
 import * as changeCase from 'change-case-object';
@@ -50,21 +54,37 @@ export const getItem = async ($axios: NuxtAxiosInstance, id: number) => {
   return res;
 };
 
-export const saveItem = async ($axios: NuxtAxiosInstance, itemForm: ItemForm) => {
-  await $axios.$post(`/items`, changeCase.snake({
-    ...itemForm,
-    ...itemForm.temporaryImage
-  }));
+export const saveItem = async (
+  $axios: NuxtAxiosInstance,
+  itemForm: ItemForm
+) => {
+  await $axios.$post(
+    `/items`,
+    changeCase.snake({
+      ...itemForm,
+      ...itemForm.temporaryImage,
+    })
+  );
 };
 
-export const updateItem = async ($axios: NuxtAxiosInstance, id: number, itemForm: ItemForm) => {
-  await $axios.$patch(`/items/${id}`, changeCase.snake({
-    ...itemForm,
-    ...itemForm.temporaryImage
-  }));
+export const updateItem = async (
+  $axios: NuxtAxiosInstance,
+  id: number,
+  itemForm: ItemForm
+) => {
+  await $axios.$patch(
+    `/items/${id}`,
+    changeCase.snake({
+      ...itemForm,
+      ...itemForm.temporaryImage,
+    })
+  );
 };
 
-export const uploadTemporaryImage = async ($axios: NuxtAxiosInstance, file: any) => {
+export const uploadTemporaryImage = async (
+  $axios: NuxtAxiosInstance,
+  file: any
+) => {
   const formData = new FormData();
   formData.append('file', file);
 

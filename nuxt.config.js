@@ -16,19 +16,34 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'google-site-verification', content: '_jASLx_POf2gLCEK6zKk4IWQMU9ntsMnEFIiUASGQGk', },
+      {
+        name: 'google-site-verification',
+        content: '_jASLx_POf2gLCEK6zKk4IWQMU9ntsMnEFIiUASGQGk',
+      },
       { name: 'keywords', content: 'ibuos,使っているもの,使っているもの' },
-      { name: 'description', content: 'ibuosは「使っているもの」の管理・共有サービスです。', },
+      {
+        name: 'description',
+        content: 'ibuosは「使っているもの」の管理・共有サービスです。',
+      },
       { name: 'author', content: 'ibuos' },
       { property: 'og:site_name', content: 'ibuos' },
       { property: 'og:title', content: 'ibuos | 使っているものをシェアしよう' },
-      { property: 'og:description', content: 'ibuosは「使っているもの」の管理・共有サービスです。', },
+      {
+        property: 'og:description',
+        content: 'ibuosは「使っているもの」の管理・共有サービスです。',
+      },
       { property: 'og:type', content: 'website' },
       { property: 'og:url', content: 'https://ibuos.net' },
-      { property: 'og:image', content: 'https://ibuos.net/images/ibuos@og.png', },
+      {
+        property: 'og:image',
+        content: 'https://ibuos.net/images/ibuos@og.png',
+      },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:site', content: 'https://ibuos.net' },
-      { name: 'twitter:image', content: 'https://ibuos.net/images/ibuos@og.png', },
+      {
+        name: 'twitter:image',
+        content: 'https://ibuos.net/images/ibuos@og.png',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

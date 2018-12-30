@@ -1,5 +1,5 @@
-import { TemporaryImage } from "./temporaryImage";
-import { Item } from "./item";
+import { TemporaryImage } from './temporaryImage';
+import { Item } from './item';
 
 export interface ItemForm {
   id?: number;
@@ -15,7 +15,7 @@ export default class ItemFormPresenter {
   public static build(): ItemForm {
     const temporaryImage: TemporaryImage = {
       imageTemporaryBasename: '',
-      imageTemporaryUrl: ''
+      imageTemporaryUrl: '',
     };
 
     return {
@@ -23,20 +23,20 @@ export default class ItemFormPresenter {
       name: '',
       description: '',
       link: '',
-      imageUrl: '',    
-      temporaryImage
+      imageUrl: '',
+      temporaryImage,
     };
   }
 
   public static buildFromItem(item: Item): ItemForm {
     const temporaryImage: TemporaryImage = {
       imageTemporaryBasename: '',
-      imageTemporaryUrl: ''
+      imageTemporaryUrl: '',
     };
 
     return {
       ...item,
-      temporaryImage
+      temporaryImage,
     };
   }
 }

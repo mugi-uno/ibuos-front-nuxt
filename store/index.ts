@@ -31,7 +31,6 @@ export const actions = {
       if (res && res.authenticated) {
         commit('auth/SET_USER', { res: res || {}, idToken });
       } else {
-        
       }
     }
     await Promise.resolve();

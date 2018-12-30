@@ -26,7 +26,7 @@ const authModule = namespace(auth.name);
 @Component({
   head: () => ({ title: '使っているものを追加する' }),
   middleware: ['authenticated'],
-  components: { ItemEditForm }
+  components: { ItemEditForm },
 })
 export default class NewItem extends Vue {
   @authModule.State user!: auth.User;

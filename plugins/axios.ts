@@ -18,13 +18,22 @@ const initialize = ({ $axios, store, redirect }: any) => {
     if (error && error.response && error.response.status === 401) {
       store.dispatch('alert/addWarningAlert', { title: 'ログインが必要です' });
     } else {
-      if (error && error.response && error.response.data && error.response.data.errorMessage) {
-        store.dispatch('alert/addWarningAlert', { title: error.response.data.errorMessage });
+      if (
+        error &&
+        error.response &&
+        error.response.data &&
+        error.response.data.errorMessage
+      ) {
+        store.dispatch('alert/addWarningAlert', {
+          title: error.response.data.errorMessage,
+        });
       } else {
-        store.dispatch('alert/addWarningAlert', { title: 'エラーが発生しました。しばらくおいてから再度お試しください。' });
+        store.dispatch('alert/addWarningAlert', {
+          title: 'エラーが発生しました。しばらくおいてから再度お試しください。',
+        });
       }
     }
-  })
+  });
 };
 
 export default initialize;

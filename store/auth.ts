@@ -77,7 +77,7 @@ export const actions: ActionTree<State, any> = {
   async updateDisplayName(context, name: string): Promise<void> {
     await (this.$axios as NuxtAxiosInstance).$patch('/myself/name', { name });
     context.commit(types.SET_DISPLAY_NAME, name);
-  }
+  },
 };
 
 export const mutations: MutationTree<State> = {
