@@ -10,7 +10,8 @@
     "start": "cross-env NODE_ENV=production node ./server/index.js",
     "generate": "nuxt generate",
     "lint": "eslint --ext .ts,.js,.vue --ignore-pattern dist/ .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
