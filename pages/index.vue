@@ -55,13 +55,17 @@ export default class IndexPage extends Vue {
   paginating: Paginating | null = null;
 
   async asyncData(context: NuxtContext) {
-    const page: number = parseInt(context.route.query.page as string) || 1;
-    const res = await api.top(context.$axios, page);
+    try {
+      const page: number = parseInt(context.route.query.page as string) || 1;
+      const res = await api.top(context.$axios, page);
 
-    return {
-      items: ItemPresenter.fromResponses(res.fresh_items.list),
-      paginating: PaginatingPresenter.fromResponse(res.fresh_items.meta),
-    };
+      return {
+        items: ItemPresenter.fromResponses(res.fresh_items.list),
+        paginating: PaginatingPresenter.fromResponse(res.fresh_items.meta),
+      };
+    } catch(e) {
+      context.error(e);
+    }
   }
 
   changePage(page: number) {

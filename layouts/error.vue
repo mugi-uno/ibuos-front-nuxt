@@ -3,7 +3,7 @@
     .hero-body
       .container
         template(v-if='error.statusCode === 404')
-          h1.title 404
+          h1.title 404 Not Found
           h2.subtitle ページが見つかりません
         template(v-else)
           h1.title Oops!

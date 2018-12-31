@@ -43,14 +43,18 @@ export default class EditItem extends Vue {
   saving: boolean = false;
 
   async asyncData(context: NuxtContext) {
-    const id = context.params.id;
-    const res = await api.getItem(context.$axios, id);
-    const item = ItemPresenter.fromResponse(res);
-    return {
-      id,
-      item,
-      itemForm: ItemFormPresenter.buildFromItem(item),
-    };
+    try {
+      const id = context.params.id;
+      const res = await api.getItem(context.$axios, id);
+      const item = ItemPresenter.fromResponse(res);
+      return {
+        id,
+        item,
+        itemForm: ItemFormPresenter.buildFromItem(item),
+      };
+    } catch(e) {
+      context.error(e);
+    }
   }
 
   async updateItem(itemForm: ItemForm) {

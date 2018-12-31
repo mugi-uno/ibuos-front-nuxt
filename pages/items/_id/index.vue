@@ -61,10 +61,14 @@ export default class ShowItem extends Vue {
   item: Item | null = null;
 
   async asyncData(context: NuxtContext) {
-    const res = await api.getItem(context.$axios, context.params.id);
-    return {
-      item: ItemPresenter.fromResponse(res),
-    };
+    try {
+      const res = await api.getItem(context.$axios, context.params.id);
+      return {
+        item: ItemPresenter.fromResponse(res),
+      };
+    } catch(e) {
+      context.error(e);
+    }
   }
 
   get updatedAt() {

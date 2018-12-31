@@ -55,15 +55,19 @@ export default class ShowGenre extends Vue {
   paginating: Paginating | null = null;
 
   async asyncData(context: NuxtContext) {
-    const genreName = context.params.name as string;
-    const page: number = parseInt(context.route.query.page as string) || 1;
-    const res = await api.getGenreItems(context.$axios, genreName, page);
+    try {
+      const genreName = context.params.name as string;
+      const page: number = parseInt(context.route.query.page as string) || 1;
+      const res = await api.getGenreItems(context.$axios, genreName, page);
 
-    return {
-      genreName,
-      items: ItemPresenter.fromResponses(res.list),
-      paginating: PaginatingPresenter.fromResponse(res.meta),
-    };
+      return {
+        genreName,
+        items: ItemPresenter.fromResponses(res.list),
+        paginating: PaginatingPresenter.fromResponse(res.meta),
+      };
+    } catch(e) {
+      context.error(e);
+    }
   }
 
   changePage(page: number) {
