@@ -116,7 +116,11 @@ module.exports = {
   /*
   ** Nuxt.js modules
   */
-  modules: ['@nuxtjs/axios', '~/modules/typescript.js'],
+  modules: [
+    '@nuxtjs/axios',
+    ...(isProd ? [['@nuxtjs/google-analytics', { id: 'UA-124612395-1' }]] : []),
+    '~/modules/typescript.js',
+  ],
 
   /*
   ** Build configuration
