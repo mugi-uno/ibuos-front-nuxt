@@ -141,6 +141,8 @@ module.exports = {
         'postcss-nesting': true,
       },
     },
-    plugins: isProd ? [] : [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
+    plugins: isProd ?
+      [new Dotenv({ systemvars: true })] :
+      [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
   },
 };
