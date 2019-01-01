@@ -44,6 +44,9 @@ import Paginator from '~/components/molecules/Paginator.vue';
   head() {
     return {
       title: `「${(this as any).genreName}」で使われているもの`,
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: `「${(this as any).genreName}」で使われているもの | ibuos` }
+      ]
     };
   },
   components: { ItemCard, Paginator },

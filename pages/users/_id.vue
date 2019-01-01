@@ -51,6 +51,9 @@ import Vue from 'vue';
   head() {
     return {
       title: `${(this as any).user.name}さんの使っているもの`,
+      meta: [
+        { hid: 'og:title', property: 'og:title', content: `${(this as any).user.name}さんの使っているもの | ibuos` }
+      ]
     };
   },
   components: { ItemCard, Paginator },
