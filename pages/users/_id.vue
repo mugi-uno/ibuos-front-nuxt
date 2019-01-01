@@ -5,7 +5,7 @@ section.section
       h4.title.is-4.is-flex.is-ai-center        
         figure.image.is-64x64.m-r-sm(v-if='user.picture')
           img.is-rounded(:src='user.picture')
-        | {{user.name}}さんの使っているもの
+        | {{user.name}}の使っているもの
       div(v-if='paginating')
         | {{paginating.totalCount}}件の使っているもの
 
@@ -50,9 +50,9 @@ import Vue from 'vue';
 @Component({
   head() {
     return {
-      title: `${(this as any).user.name}さんの使っているもの`,
+      title: `${(this as any).user.name}の使っているもの`,
       meta: [
-        { hid: 'og:title', property: 'og:title', content: `${(this as any).user.name}さんの使っているもの | ibuos` }
+        { hid: 'og:title', property: 'og:title', content: `${(this as any).user.name}の使っているもの | ibuos` }
       ]
     };
   },

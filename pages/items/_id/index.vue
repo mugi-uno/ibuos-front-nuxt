@@ -53,7 +53,7 @@ const authModule = namespace(auth.name);
     return {
       title: (this as any).item.name,
       meta: [
-        { hid: 'og:title', property: 'og:title', content: `${(this as any).item.name} | ibuos` },
+        { hid: 'og:title', property: 'og:title', content: `${(this as any).ogpTitle} | ibuos` },
         { hid: 'og:image', property: 'og:image', content: (this as any).ogpImage },
         { hid: 'twitter:image', name: 'twitter:image', content: (this as any).ogpImage },
       ]
@@ -79,6 +79,10 @@ export default class ShowItem extends Vue {
   get updatedAt() {
     if (!this.item) return '';
     return moment(this.item.updatedAt).fromNow() + 'に更新';
+  }
+
+  get ogpTitle() {
+    return `${this.item!.name} - ${this.item!.user!.name}の使っているもの`
   }
 
   get ogpImage() {
