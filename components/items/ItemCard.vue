@@ -8,10 +8,7 @@
       i.fas.fa-edit
   .card-image.cardImage
     nuxt-link.cardImageLink(:to='`/items/${item.id}`')
-      template(v-if='item.imageUrl')
-        img(:src='item.imageUrl')
-      template(v-else)
-        | No Image
+      item-image(:url='item.imageUrl')
   .card-content.cardContent
     .media
       .media-content
@@ -42,10 +39,11 @@ import Component from 'vue-class-component';
 import { Prop, Emit } from 'vue-property-decorator';
 import { Item } from 'presenters/item';
 import EllipsisText from '../atoms/EllipsisText.vue';
+import ItemImage from '~/components/atoms/ItemImage.vue';
 import * as moment from 'moment';
 
 @Component({
-  components: { EllipsisText },
+  components: { EllipsisText, ItemImage },
 })
 export default class ItemCard extends Vue {
   @Prop() item!: Item;
@@ -93,6 +91,7 @@ export default class ItemCard extends Vue {
   justify-content: center;
   align-items: center;
   margin: 1rem 1rem 0rem 1rem;
+  background-color: #fafafa;
 }
 
 .cardImage img {
