@@ -6,12 +6,13 @@
   )
     span.icon.is-small
       i.fas.fa-edit
-  .card-image.cardImage
-    nuxt-link.cardImageLink(:to='`/items/${item.id}`')
-      item-image(:url='item.imageUrl')
   .card-content.cardContent
-    .media
-      .media-content
+    .leftArea
+      .card-image.cardImage
+        nuxt-link.cardImageLink(:to='`/items/${item.id}`')
+          item-image(:url='item.imageUrl')
+    .rightArea
+      .itemData
         p.subtitle.is-6(v-if='item.genre')
           nuxt-link(:to='`/genres/${item.genre}`')
             ellipsis-text(
@@ -22,15 +23,13 @@
           nuxt-link(:to='`/items/${item.id}`')
             ellipsis-text(
               :text='item.name'
-              :size='40'
+              :size='50'
             )
-    .cardfooter
-      template(v-if='item.user && !withoutUser')
+      .cardfooter
         nuxt-link.user(:to='`/users/${item.user.id}`')
           figure.image.is-32x32
             img.is-rounded(:src='item.user.picture')
           span {{item.user.name}}
-      span {{updatedAtText}}
 </template>
 
 <script lang="ts">
@@ -66,6 +65,25 @@ export default class ItemCard extends Vue {
   margin: 10px;
 }
 
+.cardContent {
+  padding: 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.leftArea {
+  justify-content: center;
+  display: flex;
+  align-self: stretch;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.rightArea {
+  padding: 0.5rem 1rem;
+}
+
 .editLink {
   display: inline-block;
   position: absolute;
@@ -81,30 +99,25 @@ export default class ItemCard extends Vue {
 }
 
 .cardImage {
-  height: 160px;
+  height: 120px;
+  width: 120px;
+  min-width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .cardImageLink {
   display: flex;
-  width: calc(100% - 2rem);
+  width: calc(100% - 1rem);
   height: calc(100% - 1rem);
   justify-content: center;
   align-items: center;
-  margin: 1rem 1rem 0rem 1rem;
-  background-color: #fafafa;
 }
 
 .cardImage img {
   max-height: 100%;
   max-width: 100%;
-}
-
-.cardContent {
-  padding: 1rem;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .user {
@@ -117,6 +130,7 @@ export default class ItemCard extends Vue {
 }
 
 .cardfooter {
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

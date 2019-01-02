@@ -28,6 +28,6 @@ export default class NoImage extends Vue {
 
 <style scoped>
 .noimage {
-  width: 100px;
+  width: 70px;
 }
 </style>

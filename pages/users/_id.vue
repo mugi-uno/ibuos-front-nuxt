@@ -18,7 +18,7 @@ section.section
       v-for='(items, index) in itemChunks'
       :key='index'
     )
-      .tile.is-4(
+      .tile.is-6(
         v-for='(item) in items'
         :key='item.key'
       )
@@ -93,7 +93,7 @@ export default class ShowGenre extends Vue {
   }
 
   get itemChunks() {
-    return _.chunk(this.items, 3);
+    return _.chunk(this.items, 2);
   }
 }
 </script>
