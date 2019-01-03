@@ -15,8 +15,9 @@ nav.navbar.is-dark(role='navigation' aria-label='main navigation')
       .navbar-item.has-dropdown.is-hoverable(v-if='auth.user.id')
         nuxt-link.is-flex(to='/myself')
           .navbar-link.is-flex
-            figure.image.is-32x32.photoWrapper
-              img.photoImage(:src='auth.user.photoURL')
+            user-image.is-32x32.photoWrapper(
+              :url='auth.user.photoURL'
+            )
             span {{auth.user.displayName}}
         .navbar-dropdown.is-right
           nuxt-link.navbar-item(:to='`/users/${auth.user.id}`')
@@ -39,10 +40,13 @@ nav.navbar.is-dark(role='navigation' aria-label='main navigation')
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import UserImage from '~/components/atoms/UserImage.vue';
 import { State, Action } from 'vuex-class';
 import { State as Auth } from '../store/auth';
 
-@Component
+@Component({
+  components: { UserImage }
+})
 export default class AppHeader extends Vue {
   @State('auth') auth!: Auth;
   @Action('auth/signOut') signOut;

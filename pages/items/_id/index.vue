@@ -7,8 +7,7 @@ section.section
           .column
             .user-and-genre.is-flex.is-ai-center.m-b-md
               nuxt-link(:to='`/users/${item.user.id}`').is-flex.is-ai-center
-                figure.image.is-32x32.m-r-sm
-                  img.is-rounded(:src='item.user.picture')
+                user-image.is-32x32.m-r-sm(:url='item.user.picture')
                 div {{item.user.name}}
               .sparator-text
                 | が使っている
@@ -41,6 +40,7 @@ import * as auth from '~/store/auth';
 import * as moment from 'moment';
 import * as _ from 'lodash';
 import ItemImage from '~/components/atoms/ItemImage.vue';
+import UserImage from '~/components/atoms/UserImage.vue';
 import Component from 'vue-class-component';
 import ItemPresenter, { Item } from '~/presenters/item';
 import Vue from 'vue';
@@ -48,7 +48,7 @@ import Vue from 'vue';
 const authModule = namespace(auth.name);
 
 @Component({
-  components: { ItemImage },
+  components: { ItemImage, UserImage },
   head() {
     return {
       title: (this as any).item.name,

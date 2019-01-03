@@ -27,8 +27,7 @@
             )
       .cardfooter
         nuxt-link.user(:to='`/users/${item.user.id}`')
-          figure.image.is-32x32
-            img.is-rounded(:src='item.user.picture')
+          user-image.is-32x32(:url='item.user.picture')
           span {{item.user.name}}
 </template>
 
@@ -39,10 +38,11 @@ import { Prop, Emit } from 'vue-property-decorator';
 import { Item } from 'presenters/item';
 import EllipsisText from '../atoms/EllipsisText.vue';
 import ItemImage from '~/components/atoms/ItemImage.vue';
+import UserImage from '~/components/atoms/UserImage.vue';
 import * as moment from 'moment';
 
 @Component({
-  components: { EllipsisText, ItemImage },
+  components: { EllipsisText, ItemImage, UserImage },
 })
 export default class ItemCard extends Vue {
   @Prop() item!: Item;
