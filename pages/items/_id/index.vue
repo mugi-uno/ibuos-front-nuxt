@@ -19,7 +19,7 @@ section.section
               span.timestamp {{updatedAt}}
         .columns
           .column.is-5
-            .imageWrapper
+            .imageWrapper(:class='{ noimage: !item.imageUrl }')
               item-image(:url='item.imageUrl')
           .column
             .description
@@ -117,6 +117,10 @@ export default class ShowItem extends Vue {
   justify-content: center;
   height: 300px;
   padding: 1rem;
+
+  &.noimage {
+    height: 80px;
+  }
 
   & img {
     max-height: 100%;
