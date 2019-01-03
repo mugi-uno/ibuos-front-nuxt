@@ -4,7 +4,7 @@ section.section
 </template>
 
 <script lang="ts">
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';

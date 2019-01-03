@@ -23,7 +23,6 @@ section.section
 </template>
 
 <script lang="ts">
-import * as firebase from 'firebase';
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import { namespace } from 'vuex-class';

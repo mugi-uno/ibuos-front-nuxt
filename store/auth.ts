@@ -1,6 +1,6 @@
 import cookie from 'js-cookie';
 import { GetterTree, ActionTree, MutationTree } from 'vuex';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 
 export const name = 'auth';
