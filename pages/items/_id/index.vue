@@ -4,35 +4,33 @@ section.section
     .columns
       .column
         .columns
-          .column.is-9
-            h5.title.is-5
-              nuxt-link(:to='`/genres/${item.genre}`')
-                | {{item.genre}}
-            h3.title.is-3 {{item.name}}
-          .column.is-3.is-flex-column.justify-center
-            div
-              nuxt-link(:to='`/users/${item.user.id}`').is-flex
+          .column
+            .user-and-genre.is-flex.is-ai-center.m-b-md
+              nuxt-link(:to='`/users/${item.user.id}`').is-flex.is-ai-center
                 figure.image.is-32x32.m-r-sm
                   img.is-rounded(:src='item.user.picture')
                 div {{item.user.name}}
+              .sparator-text
+                | が使っている
+              nuxt-link(:to='`/genres/${item.genre}`')
+                | {{item.genre}}
+            h3.title.is-3 {{item.name}}
+          .column.is-2.is-flex
             div
               span.timestamp {{updatedAt}}
         .columns
-          .column
+          .column.is-5
             .imageWrapper
-              template(v-if='item.imageUrl')
-                img(:src='item.imageUrl')
-              template(v-else)
-                | No Image
-            div(v-if='item.link')
-              a(:href='item.link' target='_blank')
-                span 参考リンクを開く
-                span.icon
-                  i.fas.fa-external-link-alt
-        .columns
+              item-image(:url='item.imageUrl')
           .column
             .description
               | {{item.description}}
+            .itemLink(v-if='item.link')
+              a(:href='item.link' target='_blank')
+                hr
+                span 参考リンクを開く
+                span.icon
+                  i.fas.fa-external-link-alt
 </template>
 
 <script lang="ts">
@@ -42,6 +40,7 @@ import * as api from '~/api';
 import * as auth from '~/store/auth';
 import * as moment from 'moment';
 import * as _ from 'lodash';
+import ItemImage from '~/components/atoms/ItemImage.vue';
 import Component from 'vue-class-component';
 import ItemPresenter, { Item } from '~/presenters/item';
 import Vue from 'vue';
@@ -49,6 +48,7 @@ import Vue from 'vue';
 const authModule = namespace(auth.name);
 
 @Component({
+  components: { ItemImage },
   head() {
     return {
       title: (this as any).item.name,
@@ -93,13 +93,31 @@ export default class ShowItem extends Vue {
 </script>
 
 <style scoped>
+.user-and-genre {
+  font-size: 1.1rem;
+
+  & .sparator-text {
+    font-size: 0.80rem;
+  }
+}
+
+.itemLink {
+  font-size: 0.8rem;  
+}
+
 .imageWrapper {
-  min-height: 150px;
+  align-items: center;
+  background-color: #fafafa;
+  border-radius: 5px;
   border: 1px solid #ddd;
   display: flex;
   justify-content: center;
-  align-items: center;
-  border-radius: 5px;
+  height: 300px;
+  padding: 1rem;
+
+  & img {
+    max-height: 100%;
+  }
 }
 
 .image {
