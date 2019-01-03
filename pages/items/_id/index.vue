@@ -5,13 +5,13 @@ section.section
       .column
         .columns
           .column
-            .user-and-genre.is-flex.is-ai-center.m-b-md
+            .user-and-genre.is-flex-column.m-b-md
               nuxt-link(:to='`/users/${item.user.id}`').is-flex.is-ai-center
                 user-image.is-32x32.m-r-sm(:url='item.user.picture')
                 div {{item.user.name}}
-              .sparator-text
-                | が使っている
               nuxt-link(:to='`/genres/${item.genre}`')
+                span.sparator-text
+                  | /
                 | {{item.genre}}
             h3.title.is-3 {{item.name}}
           .column.is-2.is-flex
@@ -94,10 +94,13 @@ export default class ShowItem extends Vue {
 
 <style scoped>
 .user-and-genre {
-  font-size: 1.1rem;
+  width: 100%;
+  font-size: 1.0rem;
 
   & .sparator-text {
-    font-size: 0.80rem;
+    font-size: 0.7rem;
+    margin-left: 2.5rem;
+    margin-right: 0.25rem;
   }
 }
 

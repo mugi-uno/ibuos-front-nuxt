@@ -3,8 +3,7 @@ section.section
   .container
     .headerArea
       h4.title.is-4.is-flex.is-ai-center        
-        figure.image.is-64x64.m-r-sm(v-if='user.picture')
-          img.is-rounded(:src='user.picture')
+        user-image.is-64x64.m-r-sm(:url='user.picture')
         | {{user.name}}の使っているもの
       div(v-if='paginating')
         | {{paginating.totalCount}}件の使っているもの
@@ -41,6 +40,7 @@ import { State } from 'vuex-class';
 import { State as Auth } from '~/store/auth';
 import AnyUserPresenter, { AnyUser } from '~/presenters/anyUser';
 import Component from 'vue-class-component';
+import UserImage from '~/components/atoms/UserImage.vue';
 import ItemCard from '~/components/items/ItemCard.vue';
 import ItemPresenter, { Item } from '~/presenters/item';
 import PaginatingPresenter, { Paginating } from '~/presenters/paginating';
@@ -56,7 +56,7 @@ import Vue from 'vue';
       ]
     };
   },
-  components: { ItemCard, Paginator },
+  components: { ItemCard, UserImage, Paginator },
   watchQuery: ['page'],
 })
 export default class ShowGenre extends Vue {
