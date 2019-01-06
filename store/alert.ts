@@ -64,24 +64,26 @@ export const mutations: MutationTree<State> = {
   [types.ADD_ALERT](
     state,
     payload: {
-      title: string;
+      title: string | string[];
       type: AlertType;
       push: boolean;
       redirect: boolean;
     }
   ) {
-    const newAlert = {
-      title: payload.title,
-      type: payload.type,
-      key: uuid(),
-      hops: payload.redirect ? 1 : 0,
-    };
-
-    if (payload.push) {
-      state.alerts.push(newAlert);
-    } else {
-      state.alerts = [newAlert];
+    if (!payload.push) {
+      state.alerts = [];
     }
+    const titles = typeof payload.title === 'string' ? [payload.title] : payload.title;
+    titles.forEach(title => {
+      const newAlert = {
+        title,
+        type: payload.type,
+        key: uuid(),
+        hops: payload.redirect ? 1 : 0,
+      };
+  
+      state.alerts.push(newAlert);
+    });
   },
 
   [types.REMOVE_ALERT](state, { key }) {

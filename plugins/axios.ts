@@ -22,10 +22,10 @@ const initialize = ({ $axios, store, redirect }: any) => {
         error &&
         error.response &&
         error.response.data &&
-        error.response.data.errorMessage
+        error.response.data.error_message
       ) {
         store.dispatch('alert/addWarningAlert', {
-          title: error.response.data.errorMessage,
+          title: error.response.data.error_message,
         });
       } else {
         store.dispatch('alert/addWarningAlert', {

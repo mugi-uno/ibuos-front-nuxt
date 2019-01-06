@@ -36,15 +36,17 @@ export default class NewItem extends Vue {
   async saveItem(itemForm: ItemForm) {
     this.saving = true;
 
-    await api.saveItem(this.$axios, itemForm);
+    try {
+      await api.saveItem(this.$axios, itemForm);
 
-    this.$router.push(`/users/${this.user.id}`);
-    this.$message({
-      type: 'success',
-      message: `使っているものに「${itemForm.name}」を追加しました`,
-    });
-
-    this.saving = false;
+      this.$router.push(`/users/${this.user.id}`);
+      this.$message({
+        type: 'success',
+        message: `使っているものに「${itemForm.name}」を追加しました`,
+      });
+    } finally {
+      this.saving = false;
+    }
   }
 }
 </script>

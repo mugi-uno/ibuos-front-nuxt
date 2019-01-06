@@ -8,6 +8,7 @@ export interface ItemForm {
   description: string;
   link: string;
   imageUrl: string;
+  statusOfUse: string;
   temporaryImage: TemporaryImage;
 }
 
@@ -24,6 +25,7 @@ export default class ItemFormPresenter {
       description: '',
       link: '',
       imageUrl: '',
+      statusOfUse: 'using',
       temporaryImage,
     };
   }

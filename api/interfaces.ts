@@ -27,6 +27,7 @@ export interface ItemResponse {
   description: string;
   link: string;
   image_url: string;
+  status_of_use: string;
   key: string;
   created_at: string;
   updated_at: string;

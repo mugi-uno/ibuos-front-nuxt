@@ -64,7 +64,7 @@ export const actions: ActionTree<State, any> = {
   },
 
   async getIdToken(_, user): Promise<string> {
-    const idToken: string = await user.getIdToken();
+    const idToken: string = await user.getIdToken(true);
     return idToken;
   },
 

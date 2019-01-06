@@ -14,6 +14,7 @@
 
         .field
           label.label
+            i.fas.fa-signature.m-r-xs
             span 名前
           .control.is-medium
             input.input.is-medium(
@@ -37,6 +38,15 @@
               type='text' placeholder='https://example.com/xxx'
               v-model='itemForm.link'
             )
+
+        .field
+          label.label
+            i.fas.fa-car-side.m-r-xs
+            span 使用状況
+          el-radio-group(v-model='itemForm.statusOfUse')
+            el-radio-button(label='using') 使っている
+            el-radio-button(label='notusing') いまは使っていない
+
       .column.is-4.is-flex
         .imageBox
           image-uploader(

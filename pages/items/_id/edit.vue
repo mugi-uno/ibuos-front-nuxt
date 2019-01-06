@@ -60,15 +60,17 @@ export default class EditItem extends Vue {
   async updateItem(itemForm: ItemForm) {
     this.saving = true;
 
-    await api.updateItem(this.$axios, this.id, itemForm);
+    try {
+      await api.updateItem(this.$axios, this.id, itemForm);
 
-    this.$router.push(`/users/${this.user.id}`);
-    this.$message({
-      type: 'success',
-      message: `「${itemForm.name}」を更新しました`,
-    });
-
-    this.saving = false;
+      this.$router.push(`/users/${this.user.id}`);
+      this.$message({
+        type: 'success',
+        message: `「${itemForm.name}」を更新しました`,
+      });
+    } finally {
+      this.saving = false;
+    }
   }
 }
 </script>
