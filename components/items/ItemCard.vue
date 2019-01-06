@@ -6,7 +6,7 @@
   )
     span.icon.is-small
       i.fas.fa-edit
-  .card-content.cardContent
+  .card-content.cardContent(:class='{ notUsing: isNotUsing }')
     .leftArea
       .card-image.cardImage
         nuxt-link.cardImageLink(:to='`/items/${item.id}`')
@@ -21,6 +21,7 @@
             )
         p.title.is-5
           nuxt-link(:to='`/items/${item.id}`')
+            i(v-if='isNotUsing').fas.fa-archive.m-r-xs
             ellipsis-text(
               :text='item.name'
               :size='50'
@@ -51,6 +52,10 @@ export default class ItemCard extends Vue {
   @Prop({ default: false })
   editable!: boolean;
 
+  get isNotUsing() {
+    return this.item!.statusOfUse === 'notusing';
+  }
+
   get updatedAtText() {
     return moment(this.item.updatedAt).fromNow();
   }
@@ -70,6 +75,10 @@ export default class ItemCard extends Vue {
   flex-grow: 1;
   display: flex;
   align-items: center;
+
+  &.notUsing {
+    background-color: #eee;
+  }
 }
 
 .leftArea {

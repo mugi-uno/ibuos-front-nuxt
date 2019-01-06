@@ -13,7 +13,10 @@ section.section
                 span.sparator-text
                   | /
                 | {{item.genre}}
-            h3.title.is-3 {{item.name}}
+            h3.title.is-3
+              i(v-if='isNotUsing').fas.fa-archive.m-r-sm
+              | {{item.name}}
+              span(v-if='isNotUsing').notUsingLabel （過去に利用）
           .column.is-2.is-flex
             div
               span.timestamp {{updatedAt}}
@@ -82,8 +85,13 @@ export default class ShowItem extends Vue {
     return moment(this.item.updatedAt).fromNow() + 'に更新';
   }
 
+  get isNotUsing() {
+    return this.item!.statusOfUse === 'notusing';
+  }
+
   get ogpTitle() {
-    return `${this.item!.name} - ${this.item!.user!.name}の使っているもの`
+    const prefix = `${this.item!.name} - ${this.item!.user!.name}`;
+    return this.isNotUsing ? `${prefix}の使っていたもの` : `${prefix}の使っているもの`;
   }
 
   get ogpImage() {
@@ -102,6 +110,10 @@ export default class ShowItem extends Vue {
     margin-left: 2.5rem;
     margin-right: 0.25rem;
   }
+}
+
+.notUsingLabel {
+  font-size: 0.5em;
 }
 
 .itemLink {
