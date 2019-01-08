@@ -1,30 +1,73 @@
-import cookieparser from 'cookieparser';
-import { Commit } from 'vuex';
+import cookie from 'cookie';
+import jwt from 'jsonwebtoken';
+import { Commit, Dispatch } from 'vuex';
+import { NuxtContext } from '~/types';
+import { NuxtAxiosInstance } from '@nuxtjs/axios';
 
-const parseTokenFromCookie = (cookie) => {
-  if (!cookie) return '';
+const parseTokenFromCookie = (cookieString) => {
+  if (!cookieString) return '';
 
-  const parsed = cookieparser.parse(cookie);
+  const parsed = cookie.parse(cookieString);
 
-  if (!parsed.auth) return '';
+  if (!parsed.auth || !parsed.rt) return null;
 
-  return JSON.parse(parsed.auth) || {};
+  return {
+    auth: JSON.parse(parsed.auth),
+    rt: parsed.rt,
+  } || null;
 };
+
+const tokenRefresh = async ($axios: NuxtAxiosInstance, refreshToken: string) => {
+  const res = await $axios.post(
+    `https://securetoken.googleapis.com/v1/token?key=${process.env.FIREBASE_API_KEY}`,
+    { grant_type: 'refresh_token', refresh_token: refreshToken }
+  );
+
+  return {
+    idToken: res.data.id_token,
+    refreshToken: res.data.refresh_token
+  };
+};
+
+const writeTokenCookie = (res, idToken, refreshToken) => {
+  const decoded = jwt.decode(idToken);
+  const secure = process.env.NODE_ENV === 'production';
+  const now = new Date().getTime();
+
+  res.setHeader('Set-Cookie', [
+    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires: new Date(now + 60 * 60 * 1000) }),
+    cookie.serialize('rt', refreshToken, { secure, expires: new Date(now + 14 * 24 * 60 * 60 * 1000) })
+  ]);
+}
 
 export const actions = {
   async nuxtServerInit(
-    { commit }: { commit: Commit },
-    { req, app }: { req: any; app: any }
+    { commit, dispatch }: { commit: Commit, dispatch: Dispatch },
+    { req, res, app }: NuxtContext
   ) {
     // Cookieをもとに認証状態を復元する
-    const auth = parseTokenFromCookie(req.headers.cookie);
+    const cookieValue = parseTokenFromCookie((req.headers as any).cookie);
+    if (!cookieValue) return;
+
+    const auth = cookieValue.auth;
+    const refreshToken = cookieValue.rt;
 
     if (!auth.idToken || !auth.exp) return;
 
     // 有効期限が切れている場合はトークンを再取得する
     // (処理・通信時間を考慮して５分ほど猶予を見る)
     let idToken;
-    if (auth.exp < new Date().getTime() + 300)
+    if (auth.exp < new Date().getTime() + 300) {
+      try {
+        const data = await tokenRefresh(app.$axios, refreshToken);
+        writeTokenCookie(res, data.idToken, data.refreshToken);
+        idToken = data.idToken;
+      } catch(_e) {
+        idToken = null;
+      }
+    } else {
+      idToken = auth.idToken;
+    }
 
     if (idToken) {
       const res = await app.$axios

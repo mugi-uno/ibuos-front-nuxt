@@ -5,6 +5,7 @@ import { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 
 interface NuxtContext {
+  app: Vue;
   isClient: boolean;
   isServer: boolean;
   isStatic: boolean;

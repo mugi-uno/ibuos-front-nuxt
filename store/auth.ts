@@ -59,11 +59,16 @@ export const actions: ActionTree<State, any> = {
       }
     );
 
-    const decoded = jwt.decode(idToken);
-
-    cookie.set('auth', { idToken, exp: decoded.exp });
-
+    context.dispatch('saveTokenToCookie', { idToken, refreshToken: user.refreshToken });
     context.commit(types.SET_USER, { res: res || {}, user, idToken });
+  },
+
+  saveTokenToCookie(_, { idToken, refreshToken }) {
+    const decoded = jwt.decode(idToken);
+    const secure = process.env.NODE_ENV === 'production';
+    const now = new Date().getTime();
+    cookie.set('auth', { idToken, exp: decoded.exp }, { secure, expires: new Date(now + 60 * 60 * 1000) });
+    cookie.set('rt', refreshToken, { secure, expires: new Date(now + 14 * 24 * 60 * 60 * 1000) });
   },
 
   async getIdToken(_, user): Promise<string> {
@@ -74,6 +79,7 @@ export const actions: ActionTree<State, any> = {
   async signOut(context): Promise<void> {
     context.commit(types.INIT_USER);
     cookie.remove('auth');
+    cookie.remove('rt');
     await firebase.auth().signOut();
   },
 
