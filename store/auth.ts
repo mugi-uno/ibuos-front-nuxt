@@ -1,4 +1,5 @@
 import cookie from 'js-cookie';
+import jwt from 'jsonwebtoken';
 import { GetterTree, ActionTree, MutationTree } from 'vuex';
 import * as firebase from 'firebase/app';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
@@ -58,7 +59,9 @@ export const actions: ActionTree<State, any> = {
       }
     );
 
-    cookie.set('auth', { idToken });
+    const decoded = jwt.decode(idToken);
+
+    cookie.set('auth', { idToken, exp: decoded.exp });
 
     context.commit(types.SET_USER, { res: res || {}, user, idToken });
   },
