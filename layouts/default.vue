@@ -5,7 +5,7 @@
     alerts
     nuxt
   footer.footer.layoutFooter
-    .content.has-text-right
+    .content.has-text-left
       div
         nuxt-link(to='/help') このサイトについて
       div
