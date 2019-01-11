@@ -9,9 +9,6 @@ nav.navbar.is-dark(role='navigation' aria-label='main navigation')
       span
   .navbar-menu#navbarRightMenu
     .navbar-end
-      nuxt-link.navbar-item(to='/items/new')
-        i.fas.fa-edit
-        span 使っているものを追加する
       .navbar-item.has-dropdown.is-hoverable(v-if='auth.user.id')
         nuxt-link.is-flex(to='/myself')
           .navbar-link.is-flex
@@ -45,7 +42,7 @@ import { State, Action } from 'vuex-class';
 import { State as Auth } from '../store/auth';
 
 @Component({
-  components: { UserImage }
+  components: { UserImage },
 })
 export default class AppHeader extends Vue {
   @State('auth') auth!: Auth;

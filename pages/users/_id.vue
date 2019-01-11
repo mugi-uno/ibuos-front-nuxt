@@ -1,5 +1,6 @@
 <template lang='pug'>
 section.section
+  link-to-new-item
   .container
     .headerArea
       h4.title.is-4.is-flex.is-ai-center        
@@ -45,6 +46,7 @@ import ItemCard from '~/components/items/ItemCard.vue';
 import ItemPresenter, { Item } from '~/presenters/item';
 import PaginatingPresenter, { Paginating } from '~/presenters/paginating';
 import Paginator from '~/components/molecules/Paginator.vue';
+import LinkToNewItem from '~/components/atoms/LinkToNewItem.vue';
 import Vue from 'vue';
 
 @Component({
@@ -52,11 +54,15 @@ import Vue from 'vue';
     return {
       title: `${(this as any).user.name}の使っているもの`,
       meta: [
-        { hid: 'og:title', property: 'og:title', content: `${(this as any).user.name}の使っているもの | ibuos` }
-      ]
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: `${(this as any).user.name}の使っているもの | ibuos`,
+        },
+      ],
     };
   },
-  components: { ItemCard, UserImage, Paginator },
+  components: { ItemCard, UserImage, LinkToNewItem, Paginator },
   watchQuery: ['page'],
 })
 export default class ShowGenre extends Vue {
@@ -79,7 +85,7 @@ export default class ShowGenre extends Vue {
         items: ItemPresenter.fromResponses(res.list),
         paginating: PaginatingPresenter.fromResponse(res.meta),
       };
-    } catch(e) {
+    } catch (e) {
       context.error(e);
     }
   }

@@ -15,19 +15,41 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'google-site-verification', content: '_jASLx_POf2gLCEK6zKk4IWQMU9ntsMnEFIiUASGQGk' },
+      {
+        name: 'google-site-verification',
+        content: '_jASLx_POf2gLCEK6zKk4IWQMU9ntsMnEFIiUASGQGk',
+      },
       { name: 'keywords', content: 'ibuos,使っているもの,使っているもの' },
-      { name: 'description', content: '「使っているもの」の管理・共有サービス' },
+      {
+        name: 'description',
+        content: '「使っているもの」の管理・共有サービス',
+      },
       { name: 'author', content: 'ibuos' },
       { property: 'og:site_name', content: 'ibuos' },
       { hid: 'og:title', property: 'og:title', content: 'ibuos' },
-      { hid: 'og:description', property: 'og:description', content: '「使っているもの」の管理・共有サービス' },
+      {
+        hid: 'og:description',
+        property: 'og:description',
+        content: '「使っているもの」の管理・共有サービス',
+      },
       { hid: 'og:type', property: 'og:type', content: 'website' },
       { hid: 'og:url', property: 'og:url', content: 'https://ibuos.net' },
-      { hid: 'og:image', property: 'og:image', content: 'https://ibuos.net/images/ibuos@og.png' },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: 'https://ibuos.net/images/ibuos@og.png',
+      },
       { hid: 'twitter:card', name: 'twitter:card', content: 'summary' },
-      { hid: 'twitter:site', name: 'twitter:site', content: 'https://ibuos.net' },
-      { hid: 'twitter:image', name: 'twitter:image', content: 'https://ibuos.net/images/ibuos@og.png' },
+      {
+        hid: 'twitter:site',
+        name: 'twitter:site',
+        content: 'https://ibuos.net',
+      },
+      {
+        hid: 'twitter:image',
+        name: 'twitter:image',
+        content: 'https://ibuos.net/images/ibuos@og.png',
+      },
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
@@ -130,8 +152,8 @@ module.exports = {
         'postcss-nesting': true,
       },
     },
-    plugins: isProd ?
-      [new Dotenv({ systemvars: true })] :
-      [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
+    plugins: isProd
+      ? [new Dotenv({ systemvars: true })]
+      : [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
   },
 };

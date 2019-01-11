@@ -30,8 +30,19 @@ const authModule = namespace(auth.name);
 })
 export default class NewItem extends Vue {
   @authModule.State user!: auth.User;
-  itemForm: ItemForm = ItemFormPresenter.build();
+  itemForm!: ItemForm;
   saving: boolean = false;
+
+  asyncData(context: NuxtContext) {
+    const itemForm = ItemFormPresenter.build();
+    const genre = context.route.query.genre as string;
+
+    if (genre) {
+      itemForm.genre = genre;
+    }
+
+    return { itemForm };
+  }
 
   async saveItem(itemForm: ItemForm) {
     this.saving = true;

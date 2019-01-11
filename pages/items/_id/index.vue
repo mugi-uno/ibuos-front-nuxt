@@ -1,5 +1,6 @@
 <template lang='pug'>
 section.section
+  link-to-new-item(:genre='item.genre')
   .container
     .columns
       .column
@@ -44,6 +45,7 @@ import * as moment from 'moment';
 import * as _ from 'lodash';
 import ItemImage from '~/components/atoms/ItemImage.vue';
 import UserImage from '~/components/atoms/UserImage.vue';
+import LinkToNewItem from '~/components/atoms/LinkToNewItem.vue';
 import Component from 'vue-class-component';
 import ItemPresenter, { Item } from '~/presenters/item';
 import Vue from 'vue';
@@ -51,16 +53,32 @@ import Vue from 'vue';
 const authModule = namespace(auth.name);
 
 @Component({
-  components: { ItemImage, UserImage },
+  components: { ItemImage, UserImage, LinkToNewItem },
   head() {
     return {
       title: (this as any).item.name,
       meta: [
-        { hid: 'og:title', property: 'og:title', content: `${(this as any).ogpTitle} | ibuos` },
-        { hid: 'og:title', property: 'og:description', content: `${(this as any).ogpTitle} | ibuos` },
-        { hid: 'og:image', property: 'og:image', content: (this as any).ogpImage },
-        { hid: 'twitter:image', name: 'twitter:image', content: (this as any).ogpImage },
-      ]
+        {
+          hid: 'og:title',
+          property: 'og:title',
+          content: `${(this as any).ogpTitle} | ibuos`,
+        },
+        {
+          hid: 'og:title',
+          property: 'og:description',
+          content: `${(this as any).ogpTitle} | ibuos`,
+        },
+        {
+          hid: 'og:image',
+          property: 'og:image',
+          content: (this as any).ogpImage,
+        },
+        {
+          hid: 'twitter:image',
+          name: 'twitter:image',
+          content: (this as any).ogpImage,
+        },
+      ],
     };
   },
 })
@@ -75,7 +93,7 @@ export default class ShowItem extends Vue {
       return {
         item: ItemPresenter.fromResponse(res),
       };
-    } catch(e) {
+    } catch (e) {
       context.error(e);
     }
   }
@@ -91,7 +109,9 @@ export default class ShowItem extends Vue {
 
   get ogpTitle() {
     const prefix = `${this.item!.name} - ${this.item!.user!.name}`;
-    return this.isNotUsing ? `${prefix}の使っていたもの` : `${prefix}の使っているもの`;
+    return this.isNotUsing
+      ? `${prefix}の使っていたもの`
+      : `${prefix}の使っているもの`;
   }
 
   get ogpImage() {
@@ -103,7 +123,7 @@ export default class ShowItem extends Vue {
 <style scoped>
 .user-and-genre {
   width: 100%;
-  font-size: 1.0rem;
+  font-size: 1rem;
 
   & .sparator-text {
     font-size: 0.7rem;
@@ -117,7 +137,7 @@ export default class ShowItem extends Vue {
 }
 
 .itemLink {
-  font-size: 0.8rem;  
+  font-size: 0.8rem;
 }
 
 .imageWrapper {

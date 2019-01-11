@@ -59,7 +59,10 @@ export const actions: ActionTree<State, any> = {
       }
     );
 
-    context.dispatch('saveTokenToCookie', { idToken, refreshToken: user.refreshToken });
+    context.dispatch('saveTokenToCookie', {
+      idToken,
+      refreshToken: user.refreshToken,
+    });
     context.commit(types.SET_USER, { res: res || {}, user, idToken });
   },
 

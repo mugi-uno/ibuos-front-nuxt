@@ -1,5 +1,6 @@
 <template lang='pug'>
 div
+  link-to-new-item
   section.hero.is-light.is-small.is-paddingless
     .hero-body.heroBody
       .container
@@ -41,13 +42,14 @@ import { NuxtContext } from 'types';
 import * as _ from 'lodash';
 import ItemCard from '~/components/items/ItemCard.vue';
 import Paginator from '~/components/molecules/Paginator.vue';
+import LinkToNewItem from '~/components/atoms/LinkToNewItem.vue';
 
 @Component({
   head: () => ({
     title: 'ibuos',
     titleTemplate: '',
   }),
-  components: { ItemCard, Paginator },
+  components: { ItemCard, LinkToNewItem, Paginator },
   watchQuery: ['page'],
 })
 export default class IndexPage extends Vue {
@@ -63,7 +65,7 @@ export default class IndexPage extends Vue {
         items: ItemPresenter.fromResponses(res.fresh_items.list),
         paginating: PaginatingPresenter.fromResponse(res.fresh_items.meta),
       };
-    } catch(e) {
+    } catch (e) {
       context.error(e);
     }
   }

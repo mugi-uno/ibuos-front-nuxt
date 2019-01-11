@@ -8,6 +8,7 @@ section.section
       :saving='saving'
       @save='updateItem'
     )  
+  template.ib-empty(slot='link-to-new-item')
 </template>
 
 <script lang="ts">
@@ -52,7 +53,7 @@ export default class EditItem extends Vue {
         item,
         itemForm: ItemFormPresenter.buildFromItem(item),
       };
-    } catch(e) {
+    } catch (e) {
       context.error(e);
     }
   }

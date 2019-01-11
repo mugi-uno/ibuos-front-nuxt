@@ -73,7 +73,8 @@ export const mutations: MutationTree<State> = {
     if (!payload.push) {
       state.alerts = [];
     }
-    const titles = typeof payload.title === 'string' ? [payload.title] : payload.title;
+    const titles =
+      typeof payload.title === 'string' ? [payload.title] : payload.title;
     titles.forEach(title => {
       const newAlert = {
         title,
@@ -81,7 +82,7 @@ export const mutations: MutationTree<State> = {
         key: uuid(),
         hops: payload.redirect ? 1 : 0,
       };
-  
+
       state.alerts.push(newAlert);
     });
   },

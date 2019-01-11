@@ -4,28 +4,35 @@ import { Commit, Dispatch } from 'vuex';
 import { NuxtContext } from '~/types';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 
-const parseTokenFromCookie = (cookieString) => {
+const parseTokenFromCookie = cookieString => {
   if (!cookieString) return '';
 
   const parsed = cookie.parse(cookieString);
 
   if (!parsed.auth || !parsed.rt) return null;
 
-  return {
-    auth: JSON.parse(parsed.auth),
-    rt: parsed.rt,
-  } || null;
+  return (
+    {
+      auth: JSON.parse(parsed.auth),
+      rt: parsed.rt,
+    } || null
+  );
 };
 
-const tokenRefresh = async ($axios: NuxtAxiosInstance, refreshToken: string) => {
+const tokenRefresh = async (
+  $axios: NuxtAxiosInstance,
+  refreshToken: string
+) => {
   const res = await $axios.post(
-    `https://securetoken.googleapis.com/v1/token?key=${process.env.FIREBASE_API_KEY}`,
+    `https://securetoken.googleapis.com/v1/token?key=${
+      process.env.FIREBASE_API_KEY
+    }`,
     { grant_type: 'refresh_token', refresh_token: refreshToken }
   );
 
   return {
     idToken: res.data.id_token,
-    refreshToken: res.data.refresh_token
+    refreshToken: res.data.refresh_token,
   };
 };
 
@@ -35,14 +42,17 @@ const writeTokenCookie = (res, idToken, refreshToken) => {
   const expires = new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000);
 
   res.setHeader('Set-Cookie', [
-    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires }),
-    cookie.serialize('rt', refreshToken, { secure, expires })
+    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), {
+      secure,
+      expires,
+    }),
+    cookie.serialize('rt', refreshToken, { secure, expires }),
   ]);
-}
+};
 
 export const actions = {
   async nuxtServerInit(
-    { commit, dispatch }: { commit: Commit, dispatch: Dispatch },
+    { commit, dispatch }: { commit: Commit; dispatch: Dispatch },
     { req, res, app }: NuxtContext
   ) {
     // Cookieをもとに認証状態を復元する
@@ -62,7 +72,7 @@ export const actions = {
         const data = await tokenRefresh(app.$axios, refreshToken);
         writeTokenCookie(res, data.idToken, data.refreshToken);
         idToken = data.idToken;
-      } catch(_e) {
+      } catch (_e) {
         idToken = null;
       }
     } else {
