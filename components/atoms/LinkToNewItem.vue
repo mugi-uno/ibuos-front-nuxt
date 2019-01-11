@@ -48,7 +48,8 @@ export default class LinkToNewItem extends Vue {
   }
 
   &.is-absolute {
-    position: absolute;
+    z-index: 10000;
+    position: fixed;
     right: 20px;
     bottom: 40px;
   }
