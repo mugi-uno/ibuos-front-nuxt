@@ -32,11 +32,11 @@ const tokenRefresh = async ($axios: NuxtAxiosInstance, refreshToken: string) => 
 const writeTokenCookie = (res, idToken, refreshToken) => {
   const decoded = jwt.decode(idToken);
   const secure = process.env.NODE_ENV === 'production';
-  const now = new Date().getTime();
+  const expires = new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000);
 
   res.setHeader('Set-Cookie', [
-    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires: new Date(now + 60 * 60 * 1000) }),
-    cookie.serialize('rt', refreshToken, { secure, expires: new Date(now + 14 * 24 * 60 * 60 * 1000) })
+    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires }),
+    cookie.serialize('rt', refreshToken, { secure, expires })
   ]);
 }
 

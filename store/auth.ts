@@ -66,9 +66,10 @@ export const actions: ActionTree<State, any> = {
   saveTokenToCookie(_, { idToken, refreshToken }) {
     const decoded = jwt.decode(idToken);
     const secure = process.env.NODE_ENV === 'production';
-    const now = new Date().getTime();
-    cookie.set('auth', { idToken, exp: decoded.exp }, { secure, expires: new Date(now + 60 * 60 * 1000) });
-    cookie.set('rt', refreshToken, { secure, expires: new Date(now + 14 * 24 * 60 * 60 * 1000) });
+    const expires = new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000);
+
+    cookie.set('auth', { idToken, exp: decoded.exp }, { secure, expires });
+    cookie.set('rt', refreshToken, { secure, expires });
   },
 
   async getIdToken(_, user): Promise<string> {
