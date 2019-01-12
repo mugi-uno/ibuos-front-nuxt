@@ -25,12 +25,11 @@ export default class ComponentName extends Vue {
   public mounted() {
     global.firebaseui.start('.firebaseui-auth-container', {
       callbacks: {
-        signInSuccess: (
-          currentUser: firebase.User,
-          credential: any,
+        signInSuccessWithAuthResult: (
+          authResult: firebase.auth.UserCredential,
           redirectUrl: any
         ) => {
-          this.signin(currentUser).then(() => {
+          this.signin(authResult).then(() => {
             this.$router.push((this.$route.query.r as string) || '/');
             this.$message({
               type: 'success',

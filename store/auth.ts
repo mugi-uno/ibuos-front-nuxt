@@ -47,11 +47,15 @@ export const getters: GetterTree<State, any> = {
 };
 
 export const actions: ActionTree<State, any> = {
-  async signin(context, user) {
+  async signin(context, authResult: firebase.auth.UserCredential) {
+    const user: firebase.User = authResult.user!;
     const idToken: string = await context.dispatch('getIdToken', user);
+
     const res = await (this.$axios as NuxtAxiosInstance).$post(
       '/users',
-      {},
+      {
+        additionalUserInfo: authResult.additionalUserInfo
+      },
       {
         headers: {
           Authorization: `Bearer ${idToken}`,
@@ -75,7 +79,7 @@ export const actions: ActionTree<State, any> = {
     cookie.set('rt', refreshToken, { secure, expires });
   },
 
-  async getIdToken(_, user): Promise<string> {
+  async getIdToken(_, user: firebase.User): Promise<string> {
     const idToken: string = await user.getIdToken(true);
     return idToken;
   },
