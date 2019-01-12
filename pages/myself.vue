@@ -2,6 +2,11 @@
 section.section
   .container
     .columns
+      .column
+        label.label
+          span 連携済サービス
+        linked-providers
+    .columns
       .column.is-6
         label.label
           span 表示名
@@ -30,12 +35,14 @@ import { State as Auth } from '../store/auth';
 import * as qs from 'query-string';
 import * as auth from '~/store/auth';
 import { NuxtContext } from 'types';
+import LinkedProviders from '~/components/molecules/LinkedProviders.vue';
 
 const authModule = namespace(auth.name);
 
 @Component({
   head: () => ({ title: 'マイページ' }),
   middleware: ['authenticated'],
+  components: { LinkedProviders },
 })
 export default class Myself extends Vue {
   @authModule.State user!: auth.User;
