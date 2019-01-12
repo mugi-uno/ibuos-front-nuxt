@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 import { GetterTree, ActionTree, MutationTree } from 'vuex';
 import * as firebase from 'firebase/app';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
+import * as changeCase from 'change-case-object';
 
 export const name = 'auth';
 
@@ -21,6 +22,16 @@ export interface User {
   refreshToken: string;
   idToken: string;
   likeSheetIds: number[];
+  profileOfGithub: ProvierProfile;
+  profileOfTwitter: ProvierProfile;
+  profileOfGoogle: ProvierProfile;
+}
+
+export interface ProvierProfile {
+  providerId: number | null;
+  name: string;
+  picture: string;
+  url: string;
 }
 
 export interface State {
@@ -38,6 +49,9 @@ export const state = (): State => ({
     refreshToken: '',
     idToken: '',
     likeSheetIds: [],
+    profileOfGithub: { providerId: null, name: '', picture: '', url: '' },
+    profileOfTwitter: { providerId: null, name: '', picture: '', url: '' },
+    profileOfGoogle: { providerId: null, name: '', picture: '', url: '' }
   },
   initialized: false,
 });
@@ -111,6 +125,9 @@ export const mutations: MutationTree<State> = {
       refreshToken: (user && user.refreshToken) || '',
       uid: (user && user.uid) || '',
       likeSheetIds: [],
+      profileOfGithub: changeCase.snake(res.profile_of_github),
+      profileOfTwitter: changeCase.snake(res.profile_of_twitter),
+      profileOfGoogle: changeCase.snake(res.profile_of_google),
     };
   },
 
@@ -124,6 +141,9 @@ export const mutations: MutationTree<State> = {
       refreshToken: '',
       idToken: '',
       likeSheetIds: [],
+      profileOfGithub: { providerId: null, name: '', picture: '', url: '' },
+      profileOfTwitter: { providerId: null, name: '', picture: '', url: '' },
+      profileOfGoogle: { providerId: null, name: '', picture: '', url: '' }
     };
   },
 
