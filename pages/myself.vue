@@ -1,11 +1,11 @@
 <template lang='pug'>
 section.section
   .container
-    .columns
-      .column
-        label.label
-          span 連携済サービス
-        linked-providers
+    //- .columns
+    //-   .column
+    //-     label.label
+    //-       span 連携済サービス
+    //-     linked-providers
     .columns
       .column.is-6
         label.label
