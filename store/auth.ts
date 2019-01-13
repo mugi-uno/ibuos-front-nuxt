@@ -4,6 +4,7 @@ import { GetterTree, ActionTree, MutationTree } from 'vuex';
 import * as firebase from 'firebase/app';
 import { NuxtAxiosInstance } from '@nuxtjs/axios';
 import * as changeCase from 'change-case-object';
+import { ProvierProfile } from '~/presenters/anyUser';
 
 export const name = 'auth';
 
@@ -25,13 +26,6 @@ export interface User {
   profileOfGithub: ProvierProfile;
   profileOfTwitter: ProvierProfile;
   profileOfGoogle: ProvierProfile;
-}
-
-export interface ProvierProfile {
-  providerId: number | null;
-  name: string;
-  picture: string;
-  url: string;
 }
 
 export interface State {
@@ -125,9 +119,9 @@ export const mutations: MutationTree<State> = {
       refreshToken: (user && user.refreshToken) || '',
       uid: (user && user.uid) || '',
       likeSheetIds: [],
-      profileOfGithub: changeCase.snake(res.profile_of_github),
-      profileOfTwitter: changeCase.snake(res.profile_of_twitter),
-      profileOfGoogle: changeCase.snake(res.profile_of_google),
+      profileOfGithub: changeCase.camel(res.profile_of_github),
+      profileOfTwitter: changeCase.camel(res.profile_of_twitter),
+      profileOfGoogle: changeCase.camel(res.profile_of_google),
     };
   },
 

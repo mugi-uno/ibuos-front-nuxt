@@ -6,6 +6,13 @@ export interface AnyUser {
   picture: string;
 }
 
+export interface ProvierProfile {
+  providerId: number | null;
+  name: string;
+  picture: string;
+  url: string;
+}
+
 export interface AnyUserWithFollow extends AnyUser {
   following?: boolean;
   followed?: boolean;

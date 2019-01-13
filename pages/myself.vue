@@ -1,11 +1,15 @@
 <template lang='pug'>
 section.section
   .container
-    //- .columns
-    //-   .column
-    //-     label.label
-    //-       span 連携済サービス
-    //-     linked-providers
+    .columns
+      .column
+        label.label
+          span 連携済サービス
+        linked-providers(
+          :profile-of-github='user.profileOfGithub'
+          :profile-of-twitter='user.profileOfTwitter'
+          :profile-of-google='user.profileOfGoogle'
+        )
     .columns
       .column.is-6
         label.label
