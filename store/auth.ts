@@ -12,6 +12,7 @@ export const types = {
   SET_USER: 'SET_USER',
   INIT_USER: 'INIT_USER',
   SET_DISPLAY_NAME: 'SET_DISPLAY_NAME',
+  LINK_PROVIDER: 'LINK_PROVIDER',
 };
 
 export interface User {
@@ -99,6 +100,18 @@ export const actions: ActionTree<State, any> = {
     await firebase.auth().signOut();
   },
 
+  async linkProvider(context, authResult: firebase.auth.UserCredential) {
+    const res = await (this.$axios as NuxtAxiosInstance).$post(
+      `/myself/provider`, { additionalUserInfo: authResult.additionalUserInfo }
+    );
+
+    context.commit(types.LINK_PROVIDER, {
+      profileOfGithub: changeCase.camel(res.profile_of_github),
+      profileOfTwitter: changeCase.camel(res.profile_of_twitter),
+      profileOfGoogle: changeCase.camel(res.profile_of_google),
+    });
+  },
+
   async updateDisplayName(context, name: string): Promise<void> {
     await (this.$axios as NuxtAxiosInstance).$patch('/myself/name', { name });
     context.commit(types.SET_DISPLAY_NAME, name);
@@ -139,6 +152,15 @@ export const mutations: MutationTree<State> = {
       profileOfTwitter: { providerId: null, name: '', picture: '', url: '' },
       profileOfGoogle: { providerId: null, name: '', picture: '', url: '' }
     };
+  },
+  
+  [types.LINK_PROVIDER](
+    state,
+    payload: { profileOfGithub: ProvierProfile, profileOfTwitter: ProvierProfile, profileOfGoogle: ProvierProfile }
+  ) {
+    state.user.profileOfGithub = payload.profileOfGithub;
+    state.user.profileOfTwitter = payload.profileOfTwitter;
+    state.user.profileOfGoogle = payload.profileOfGoogle;
   },
 
   [types.SET_DISPLAY_NAME](state, displayName: string) {

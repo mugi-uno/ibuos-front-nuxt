@@ -9,6 +9,7 @@ section.section
           :profile-of-github='user.profileOfGithub'
           :profile-of-twitter='user.profileOfTwitter'
           :profile-of-google='user.profileOfGoogle'
+          @link='handleLinkProvider'
         )
     .columns
       .column.is-6
@@ -51,6 +52,7 @@ const authModule = namespace(auth.name);
 export default class Myself extends Vue {
   @authModule.State user!: auth.User;
   @authModule.Action updateDisplayName: any;
+  @authModule.Action linkProvider: any;
 
   name = '';
   updated = false;
@@ -59,6 +61,18 @@ export default class Myself extends Vue {
   asyncData(context: NuxtContext) {
     const user: auth.User = context.store.state.auth.user;
     return { name: user.displayName };
+  }
+
+  async handleLinkProvider(credential: firebase.auth.UserCredential) {
+    try {
+      await this.linkProvider(credential);
+    } catch {
+      // nothing to do.
+      this.$message({
+        type: 'error',
+        message: '更新に失敗しました。時間をおいて再度お試しください。',
+      });
+    }
   }
 
   async handleUpdate() {

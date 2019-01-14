@@ -1,6 +1,6 @@
 <template lang='pug'>
 div
-  a.button.is-small(
+  a.button.m-l-xs.is-small(
     @click='linkToGitHub'
     :class='{ "is-primary": linkedToGithub, "not-linked": !linkedToGithub }'
   )
@@ -11,7 +11,7 @@ div
     span.not-linked-text 未連携
     span.not-linked-text-hover 連携する
 
-  a.button.is-small(
+  a.button.m-l-xs.is-small(
     @click='linkToTwitter'
     :class='{ "is-primary": linkedToTwitter, "not-linked": !linkedToTwitter }'
   )
@@ -22,7 +22,7 @@ div
     span.not-linked-text 未連携
     span.not-linked-text-hover 連携する
 
-  a.button.is-small(
+  a.button.m-l-xs.is-small(
     @click='linkToGoogle'
     :class='{ "is-primary": linkedToGoogle, "not-linked": !linkedToGoogle }'
   )
@@ -48,13 +48,16 @@ export default class LinkedProviders extends Vue {
   @Prop() profileOfTwitter!: ProvierProfile;
   @Prop() profileOfGoogle!: ProvierProfile;
 
+  @Emit()
+  link(credential: firebase.auth.UserCredential) {}
+
   async linkToOtherProvider(provider) {
     const currentUser = firebase.auth().currentUser;
     if (!currentUser) return;
 
-    const result = await currentUser.linkWithPopup(provider);
+    const credential: firebase.auth.UserCredential = await currentUser.linkWithPopup(provider);
 
-    console.log(result);
+    this.link(credential);
   }
 
   async linkToTwitter() {
@@ -66,7 +69,7 @@ export default class LinkedProviders extends Vue {
     await this.linkToOtherProvider(new firebase.auth.GithubAuthProvider());
   }
   async linkToGoogle() {
-    if (this.linkToGoogle) return;
+    if (this.linkedToGoogle) return;
     await this.linkToOtherProvider(new firebase.auth.GoogleAuthProvider());
   }
 
