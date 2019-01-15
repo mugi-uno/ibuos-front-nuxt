@@ -49,6 +49,19 @@ export const getUserItems = async (
   return res;
 };
 
+export const getUserGenreItems = async (
+  $axios: NuxtAxiosInstance,
+  userId: number,
+  genreName: string
+) => {
+  const res: {
+    list: ItemResponse[];
+    user: AnyUserResponse;
+  } = (await $axios.$get(`/users/${userId}/${encodeURIComponent(genreName)}`)) as any;
+
+  return res;
+};
+
 export const getItem = async ($axios: NuxtAxiosInstance, id: number) => {
   const res: ItemResponse = (await $axios.$get(`/items/${id}`)) as any;
   return res;

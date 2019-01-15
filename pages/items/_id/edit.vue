@@ -64,7 +64,7 @@ export default class EditItem extends Vue {
     try {
       await api.updateItem(this.$axios, this.id, itemForm);
 
-      this.$router.push(`/users/${this.user.id}`);
+      this.$router.push(`/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`);
       this.$message({
         type: 'success',
         message: `「${itemForm.name}」を更新しました`,

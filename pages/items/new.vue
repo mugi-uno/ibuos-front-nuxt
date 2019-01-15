@@ -50,7 +50,7 @@ export default class NewItem extends Vue {
     try {
       await api.saveItem(this.$axios, itemForm);
 
-      this.$router.push(`/users/${this.user.id}`);
+      this.$router.push(`/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`);
       this.$message({
         type: 'success',
         message: `使っているものに「${itemForm.name}」を追加しました`,

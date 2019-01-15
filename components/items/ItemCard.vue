@@ -9,7 +9,7 @@
   .card-content.cardContent(:class='{ notUsing: isNotUsing }')
     .leftArea
       .card-image.cardImage
-        nuxt-link.cardImageLink(:to='`/items/${item.id}`')
+        nuxt-link.cardImageLink(:to='`/users/${item.user.id}/${item.genre}`')
           item-image(:url='item.imageUrl')
     .rightArea
       .itemData
@@ -20,7 +20,7 @@
               :size='15'
             )
         p.title.is-5
-          nuxt-link(:to='`/items/${item.id}`')
+          nuxt-link(:to='`/users/${item.user.id}/${item.genre}`')
             i(v-if='isNotUsing').fas.fa-archive.m-r-xs
             ellipsis-text(
               :text='item.name'
