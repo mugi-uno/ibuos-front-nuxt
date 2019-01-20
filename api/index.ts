@@ -94,6 +94,10 @@ export const updateItem = async (
   );
 };
 
+export const deleteItem = async ($axios: NuxtAxiosInstance, id: number ) => {
+  return await $axios.$delete(`/items/${id}`);
+};
+
 export const uploadTemporaryImage = async (
   $axios: NuxtAxiosInstance,
   file: any

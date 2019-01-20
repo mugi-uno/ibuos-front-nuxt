@@ -1,14 +1,15 @@
 <template lang='pug'>
 section.section
   .container
-    h4.title.is-4
-      | 使っているものを更新する
+    .title-line
+      h4.title.is-4
+        | 使っているものを更新する
+      a(href='#' @click.prevent='deleteItem').delete-link.has-text-danger 削除する
     item-edit-form(
       :initial-item-form='itemForm'
       :saving='saving'
       @save='updateItem'
-    )  
-  template.ib-empty(slot='link-to-new-item')
+    )
 </template>
 
 <script lang="ts">
@@ -73,5 +74,40 @@ export default class EditItem extends Vue {
       this.saving = false;
     }
   }
+
+  async deleteItem() {
+    try {
+      await this.$confirm('削除しますか？', {
+        type: 'warning',
+        confirmButtonText: '削除する',
+        cancelButtonText: 'やめておく'
+      });
+    } catch(_e) {
+      return;
+    }
+
+    try {
+      await api.deleteItem(this.$axios, this.id);
+
+      this.$router.push(`/users/${this.user.id}`);
+      this.$message({
+        type: 'success',
+        message: `削除しました`,
+      });
+    } finally {
+      // nothing to do.
+    }
+  }
 }
 </script>
+
+<style scoped>
+.title-line {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-link {
+  font-size: 0.85em;
+}
+</style>

@@ -40,13 +40,11 @@ const writeTokenCookie = (res, idToken, refreshToken) => {
   const decoded = jwt.decode(idToken);
   const secure = process.env.NODE_ENV === 'production';
   const expires = new Date(new Date().getTime() + 14 * 24 * 60 * 60 * 1000);
+  const path = '/';
 
   res.setHeader('Set-Cookie', [
-    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), {
-      secure,
-      expires,
-    }),
-    cookie.serialize('rt', refreshToken, { secure, expires }),
+    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires, path }),
+    cookie.serialize('rt', refreshToken, { secure, expires, path }),
   ]);
 };
 
