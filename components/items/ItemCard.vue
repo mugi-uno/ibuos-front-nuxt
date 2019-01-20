@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .card.card
   nuxt-link.editLink(
     v-if='editable'

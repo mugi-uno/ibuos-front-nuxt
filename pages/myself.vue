@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 section.section
   .container
     .columns
@@ -95,5 +95,4 @@ export default class Myself extends Vue {
 }
 </script>
 
-<style>
-</style>
+<style></style>

@@ -7,8 +7,8 @@ module.exports = {
   mode: 'universal',
 
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: 'ibuos',
     titleTemplate: '%s | ibuos',
@@ -95,13 +95,13 @@ module.exports = {
   },
 
   /*
-  ** Customize the progress-bar color
-  */
+   ** Customize the progress-bar color
+   */
   loading: { color: '#FFFFFF' },
 
   /*
-  ** Global CSS
-  */
+   ** Global CSS
+   */
   css: [
     'firebaseui/dist/firebaseui.css',
     'element-ui/lib/theme-chalk/index.css',
@@ -109,8 +109,8 @@ module.exports = {
   ],
 
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
     { src: '~plugins/firebase', ssr: false },
     { src: '~plugins/bulma', ssr: false },
@@ -121,8 +121,8 @@ module.exports = {
   ],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     '@nuxtjs/axios',
     ...(isProd ? [['@nuxtjs/google-analytics', { id: 'UA-124612395-1' }]] : []),
@@ -130,12 +130,12 @@ module.exports = {
   ],
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, { isDev }) {
       if (process.server && process.browser) {
         config.module.rules.push({

@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .tabs
   ul
     li(:class='{ "is-active": mode === "help" }')

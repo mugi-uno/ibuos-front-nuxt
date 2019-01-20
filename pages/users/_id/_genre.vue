@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 section.section
   link-to-new-item(:genre='genreName')
   .container
@@ -109,7 +109,11 @@ export default class UserGenre extends Vue {
     try {
       const userId = context.params.id as number;
       const genreName = context.params.genre as string;
-      const res = await api.getUserGenreItems(context.$axios, userId, genreName);
+      const res = await api.getUserGenreItems(
+        context.$axios,
+        userId,
+        genreName
+      );
       return {
         genreName,
         user: AnyUserPresenter.fromResponse(res.user),
@@ -137,7 +141,9 @@ export default class UserGenre extends Vue {
   }
 
   get ogpImage() {
-    return this.firstItem ? this.firstItem.imageUrl : 'https://ibuos.net/images/ibuos@og.png';
+    return this.firstItem
+      ? this.firstItem.imageUrl
+      : 'https://ibuos.net/images/ibuos@og.png';
   }
 
   get firstItem() {
@@ -234,5 +240,4 @@ export default class UserGenre extends Vue {
   border: 6px solid #ccc;
   border-radius: 100%;
 }
-
 </style>

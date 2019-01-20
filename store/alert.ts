@@ -93,9 +93,11 @@ export const mutations: MutationTree<State> = {
   },
 
   [types.CLEAR_ALERT](state) {
-    state.alerts = state.alerts.filter(alert => alert.hops > 0).map(alert => ({
-      ...alert,
-      hops: alert.hops - 1,
-    }));
+    state.alerts = state.alerts
+      .filter(alert => alert.hops > 0)
+      .map(alert => ({
+        ...alert,
+        hops: alert.hops - 1,
+      }));
   },
 };

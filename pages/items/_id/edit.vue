@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 section.section
   .container
     .title-line
@@ -65,7 +65,9 @@ export default class EditItem extends Vue {
     try {
       await api.updateItem(this.$axios, this.id, itemForm);
 
-      this.$router.push(`/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`);
+      this.$router.push(
+        `/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`
+      );
       this.$message({
         type: 'success',
         message: `「${itemForm.name}」を更新しました`,
@@ -80,9 +82,9 @@ export default class EditItem extends Vue {
       await this.$confirm('削除しますか？', {
         type: 'warning',
         confirmButtonText: '削除する',
-        cancelButtonText: 'やめておく'
+        cancelButtonText: 'やめておく',
       });
-    } catch(_e) {
+    } catch (_e) {
       return;
     }
 

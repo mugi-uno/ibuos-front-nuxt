@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 nav.pagination.is-centered.is-small.m-t-sm.m-b-sm(
   v-if='needPagination'
   role='navigation'

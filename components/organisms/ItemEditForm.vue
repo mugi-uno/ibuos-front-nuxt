@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   div
     .columns
       .column.is-8

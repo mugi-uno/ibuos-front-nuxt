@@ -46,7 +46,7 @@ export const state = (): State => ({
     likeSheetIds: [],
     profileOfGithub: { providerId: null, name: '', picture: '', url: '' },
     profileOfTwitter: { providerId: null, name: '', picture: '', url: '' },
-    profileOfGoogle: { providerId: null, name: '', picture: '', url: '' }
+    profileOfGoogle: { providerId: null, name: '', picture: '', url: '' },
   },
   initialized: false,
 });
@@ -63,7 +63,7 @@ export const actions: ActionTree<State, any> = {
     const res = await (this.$axios as NuxtAxiosInstance).$post(
       '/users',
       {
-        additionalUserInfo: authResult.additionalUserInfo
+        additionalUserInfo: authResult.additionalUserInfo,
       },
       {
         headers: {
@@ -102,7 +102,8 @@ export const actions: ActionTree<State, any> = {
 
   async linkProvider(context, authResult: firebase.auth.UserCredential) {
     const res = await (this.$axios as NuxtAxiosInstance).$post(
-      `/myself/provider`, { additionalUserInfo: authResult.additionalUserInfo }
+      `/myself/provider`,
+      { additionalUserInfo: authResult.additionalUserInfo }
     );
 
     context.commit(types.LINK_PROVIDER, {
@@ -150,13 +151,17 @@ export const mutations: MutationTree<State> = {
       likeSheetIds: [],
       profileOfGithub: { providerId: null, name: '', picture: '', url: '' },
       profileOfTwitter: { providerId: null, name: '', picture: '', url: '' },
-      profileOfGoogle: { providerId: null, name: '', picture: '', url: '' }
+      profileOfGoogle: { providerId: null, name: '', picture: '', url: '' },
     };
   },
-  
+
   [types.LINK_PROVIDER](
     state,
-    payload: { profileOfGithub: ProvierProfile, profileOfTwitter: ProvierProfile, profileOfGoogle: ProvierProfile }
+    payload: {
+      profileOfGithub: ProvierProfile;
+      profileOfTwitter: ProvierProfile;
+      profileOfGoogle: ProvierProfile;
+    }
   ) {
     state.user.profileOfGithub = payload.profileOfGithub;
     state.user.profileOfTwitter = payload.profileOfTwitter;

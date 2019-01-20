@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 #app
   app-header
   #main
@@ -29,8 +29,7 @@ import Alerts from '../containers/Alerts.vue';
 export default class DefaultLayout extends Vue {}
 </script>
 
-
-<style lang='scss'>
+<style lang="scss">
 .layoutFooter {
   padding: 1rem;
   font-size: 0.8rem;

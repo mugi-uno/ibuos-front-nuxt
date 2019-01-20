@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 div
   a.button.m-l-xs.is-small(
     @click='linkToGitHub'
@@ -55,7 +55,9 @@ export default class LinkedProviders extends Vue {
     const currentUser = firebase.auth().currentUser;
     if (!currentUser) return;
 
-    const credential: firebase.auth.UserCredential = await currentUser.linkWithPopup(provider);
+    const credential: firebase.auth.UserCredential = await currentUser.linkWithPopup(
+      provider
+    );
 
     this.link(credential);
   }
@@ -73,9 +75,15 @@ export default class LinkedProviders extends Vue {
     await this.linkToOtherProvider(new firebase.auth.GoogleAuthProvider());
   }
 
-  get linkedToTwitter() { return this.profileOfTwitter && !!this.profileOfTwitter.providerId }
-  get linkedToGithub() { return this.profileOfGithub && !!this.profileOfGithub.providerId };
-  get linkedToGoogle() { return this.profileOfGoogle && !!this.profileOfGoogle.providerId };
+  get linkedToTwitter() {
+    return this.profileOfTwitter && !!this.profileOfTwitter.providerId;
+  }
+  get linkedToGithub() {
+    return this.profileOfGithub && !!this.profileOfGithub.providerId;
+  }
+  get linkedToGoogle() {
+    return this.profileOfGoogle && !!this.profileOfGoogle.providerId;
+  }
 }
 </script>
 
@@ -84,7 +92,8 @@ export default class LinkedProviders extends Vue {
   width: 150px;
   text-decoration: none;
 }
-.not-linked-text, .not-linked-text-hover {
+.not-linked-text,
+.not-linked-text-hover {
   display: none;
 }
 .not-linked {
@@ -102,7 +111,7 @@ export default class LinkedProviders extends Vue {
 
   &:hover {
     & span {
-      opacity: 1.0;
+      opacity: 1;
     }
 
     & .not-linked-text {
@@ -115,4 +124,3 @@ export default class LinkedProviders extends Vue {
   }
 }
 </style>
-

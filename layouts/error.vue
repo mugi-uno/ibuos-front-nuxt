@@ -10,7 +10,6 @@
           h2.subtitle エラーが発生しました。しばらく置いてから再度お試しください
 </template>
 
-
 <script lang="ts">
 import Vue from 'vue';
 import Component from 'vue-class-component';

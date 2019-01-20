@@ -43,7 +43,11 @@ const writeTokenCookie = (res, idToken, refreshToken) => {
   const path = '/';
 
   res.setHeader('Set-Cookie', [
-    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), { secure, expires, path }),
+    cookie.serialize('auth', JSON.stringify({ idToken, exp: decoded.exp }), {
+      secure,
+      expires,
+      path,
+    }),
     cookie.serialize('rt', refreshToken, { secure, expires, path }),
   ]);
 };

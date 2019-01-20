@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 section.section
   .firebaseui-auth-container
 </template>
@@ -58,5 +58,4 @@ export default class ComponentName extends Vue {
 }
 </script>
 
-<style>
-</style>
+<style></style>

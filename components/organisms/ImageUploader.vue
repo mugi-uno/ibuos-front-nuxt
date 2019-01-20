@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
   .wrapper
     no-ssr
       dropzone.dropzone(

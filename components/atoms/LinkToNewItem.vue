@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 el-tooltip(
   placement='left'
   :content='content'

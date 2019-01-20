@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 section.section
   .container
     h4.title.is-4
@@ -50,7 +50,9 @@ export default class NewItem extends Vue {
     try {
       await api.saveItem(this.$axios, itemForm);
 
-      this.$router.push(`/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`);
+      this.$router.push(
+        `/users/${this.user.id}/${encodeURIComponent(itemForm.genre)}`
+      );
       this.$message({
         type: 'success',
         message: `使っているものに「${itemForm.name}」を追加しました`,

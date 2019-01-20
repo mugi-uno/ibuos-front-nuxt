@@ -57,7 +57,9 @@ export const getUserGenreItems = async (
   const res: {
     list: ItemResponse[];
     user: AnyUserResponse;
-  } = (await $axios.$get(`/users/${userId}/${encodeURIComponent(genreName)}`)) as any;
+  } = (await $axios.$get(
+    `/users/${userId}/${encodeURIComponent(genreName)}`
+  )) as any;
 
   return res;
 };
@@ -94,7 +96,7 @@ export const updateItem = async (
   );
 };
 
-export const deleteItem = async ($axios: NuxtAxiosInstance, id: number ) => {
+export const deleteItem = async ($axios: NuxtAxiosInstance, id: number) => {
   return await $axios.$delete(`/items/${id}`);
 };
 

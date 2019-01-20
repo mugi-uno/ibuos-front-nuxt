@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 div
   link-to-new-item
   section.hero.is-light.is-small.is-paddingless
