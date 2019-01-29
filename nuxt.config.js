@@ -105,7 +105,7 @@ module.exports = {
   css: [
     'firebaseui/dist/firebaseui.css',
     'element-ui/lib/theme-chalk/index.css',
-    { src: '~/assets/global.scss', lang: 'scss' },
+    '~/assets/global.scss'
   ],
 
   /*
@@ -126,7 +126,6 @@ module.exports = {
   modules: [
     '@nuxtjs/axios',
     ...(isProd ? [['@nuxtjs/google-analytics', { id: 'UA-124612395-1' }]] : []),
-    '~/modules/typescript.js',
   ],
 
   /*

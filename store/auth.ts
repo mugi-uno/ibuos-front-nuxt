@@ -60,7 +60,7 @@ export const actions: ActionTree<State, any> = {
     const user: firebase.User = authResult.user!;
     const idToken: string = await context.dispatch('getIdToken', user);
 
-    const res = await (this.$axios as NuxtAxiosInstance).$post(
+    const res = await (this['$axios'] as NuxtAxiosInstance).$post(
       '/users',
       {
         additionalUserInfo: authResult.additionalUserInfo,
@@ -101,7 +101,7 @@ export const actions: ActionTree<State, any> = {
   },
 
   async linkProvider(context, authResult: firebase.auth.UserCredential) {
-    const res = await (this.$axios as NuxtAxiosInstance).$post(
+    const res = await (this['$axios'] as NuxtAxiosInstance).$post(
       `/myself/provider`,
       { additionalUserInfo: authResult.additionalUserInfo }
     );
@@ -114,7 +114,7 @@ export const actions: ActionTree<State, any> = {
   },
 
   async updateDisplayName(context, name: string): Promise<void> {
-    await (this.$axios as NuxtAxiosInstance).$patch('/myself/name', { name });
+    await (this['$axios'] as NuxtAxiosInstance).$patch('/myself/name', { name });
     context.commit(types.SET_DISPLAY_NAME, name);
   },
 };
