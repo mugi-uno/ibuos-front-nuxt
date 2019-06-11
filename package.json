@@ -55,7 +55,7 @@
     "vue-eslint-parser": "^5.0.0",
     "vue-property-decorator": "^7.3.0",
     "vue2-dropzone": "^3.5.2",
-    "vuex-class": "^0.3.1"
+    "vuex-class": "^0.3.2"
   },
   "devDependencies": {
     "@nuxtjs/google-analytics": "^2.0.2",
