@@ -58,7 +58,7 @@
     "vuex-class": "^0.3.1"
   },
   "devDependencies": {
-    "@nuxtjs/google-analytics": "^2.0.2",
+    "@nuxtjs/google-analytics": "^2.2.0",
     "@types/node": "^10.12.19",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.0.1",
