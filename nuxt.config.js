@@ -154,5 +154,8 @@ module.exports = {
     plugins: isProd
       ? [new Dotenv({ systemvars: true })]
       : [new Dotenv(), new ForkTsCheckerWebpackPlugin()],
+    typescript : {
+      typeCheck: false // or ForkTsChecker options
+    }
   },
 };

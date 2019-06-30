@@ -33,16 +33,20 @@ config.dev = !(process.env.NODE_ENV === 'production');
 // Init Nuxt.js
 const nuxt = new Nuxt(config);
 
-// Build only in dev mode
-if (config.dev) {
-  const builder = new Builder(nuxt);
-  builder.build();
-}
+(async () => {
+  await nuxt.ready();
 
-// Give nuxt middleware to express
-app.use(nuxt.render);
+  // Build only in dev mode
+  if (config.dev) {
+    const builder = new Builder(nuxt);
+    builder.build();
+  }
 
-// Listen the server
-app.listen(port, host);
+  // Give nuxt middleware to express
+  app.use(nuxt.render);
 
-console.log('Server listening on ' + host + ':' + port); // eslint-disable-line
+  // Listen the server
+  app.listen(port, host);
+
+  console.log('Server listening on ' + host + ':' + port); // eslint-disable-line
+})();
